@@ -1,0 +1,436 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#>.
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+@prefix schema: <https://schema.org/>.
+@prefix ex: <http://ex.com/>.
+@prefix pav: <http://purl.org/pav/>.
+@prefix sio: <http://semanticscience.org/ressource/>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix dc: <http://purl.org/dc/terms/>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix fabio: <http://purl.org/spar/fabio/>.
+@prefix doco: <http://purl.org/spar/doco/>.
+@prefix obo: <http://purl.obolibrary.org/obo/>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix disnet: <https://w3id.org/eboca/sem-disnet/>.
+@prefix vso: <http://purl.org/vso/ns#>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>.
+@prefix sio: <http://semanticscience.org/resource/>.
+@prefix obo: <http://purl.obolibrary.org/obo/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix cco: <http://rdf.ebi.ac.uk/terms/chembl#>.
+@prefix ctd: <http://bio2rdf.org/ctd_vocabulary:#>.
+@prefix wp: <http://vocabularies.wikipathways.org/wp#>.
+@prefix ebocaev: <https://w3id.org/eboca/evidences/>.
+@prefix frbr: <http://purl.org/vocab/frbr/core#>.
+@base <http://vocab.linkeddata.es/res/eboca-evidences/>.
+
+
+<#PAR>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "solr-evidences.json";
+    	rml:referenceFormulation ql:jsonpath;
+        rml:iterator "$.response.docs[*]";
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://vocab.linkeddata.es/res/eboca-evidences/paragraph-{id}" ;
+    	rr:class doco:Paragraph ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant dc:identifier];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/paragraph-{id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant ebocaev:section];
+    	rr:objectMap	[ rml:reference "section_s"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant ebocaev:text];
+    	rr:objectMap	[ rml:reference "text_t"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+.
+
+
+
+<#PAPER>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "solr-paper.json";
+    	rml:referenceFormulation ql:jsonpath;
+        rml:iterator "$.response.docs[*]";
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://vocab.linkeddata.es/res/eboca-evidences/paper-{id}" ;
+    	rr:class fabio:Expression ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant dc:identifier];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/paper-{id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant dc:title];
+    	rr:objectMap	[ rml:reference "name_s"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant dc:abstract];
+    	rr:objectMap	[ rml:reference "abstract_t"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:seeAlso];
+    	rr:objectMap	[ rml:reference "url_s"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant frbr:part ];
+    	rr:objectMap	[
+    		rr:parentTriplesMap	<#PAR>;
+    		rr:joinCondition	[
+    			rr:child	"id";
+    			rr:parent	"article_id_s";
+    		];
+    	];
+    ];
+.
+
+
+
+<#DGASSOC>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "solr-evidences.json";
+    	rml:referenceFormulation ql:jsonpath;
+        rml:iterator "$.response.docs[*]";
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://vocab.linkeddata.es/res/eboca-evidences/dgassoc-{disease_terms_ss}-{genetic_terms_ss}" ;
+    	rr:class sio:000983 ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:000628];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/gene-{genetic_terms_ss}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:000628];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/dis-{disease_terms_ss}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdf:type];
+    	rr:objectMap	[ rr:constant sio:000897; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rr:template "{disease_terms_ss}-{genetic_terms_ss}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:comment];
+    	rr:objectMap	[ rr:template "Association between disease {disease_terms_ss} and gene {genetic_terms_ss}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+.
+
+
+
+<#DCASSOC>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "solr-evidences.json";
+    	rml:referenceFormulation ql:jsonpath;
+        rml:iterator "$.response.docs[*]";
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://vocab.linkeddata.es/res/eboca-evidences/dcassoc-{disease_terms_ss}-{chemical_terms_ss}" ;
+    	rr:class disnet:DrugDisease ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:000628];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/dis-{disease_terms_ss}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:000628];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/chem-{chemical_terms_ss}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdf:type];
+    	rr:objectMap	[ rr:constant sio:000897; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rr:template "{disease_terms_ss}-{chemical_terms_ss}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:comment];
+    	rr:objectMap	[ rr:template "Association between disease {disease_terms_ss} and chemical {chemical_terms_ss}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+.
+
+
+
+<#GCASSOC>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "solr-evidences.json";
+    	rml:referenceFormulation ql:jsonpath;
+        rml:iterator "$.response.docs[*]";
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://vocab.linkeddata.es/res/eboca-evidences/gcassoc-{genetic_terms_ss}-{chemical_terms_ss}" ;
+    	rr:class sio:001257 ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:000628];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/gene-{genetic_terms_ss}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:000628];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/chem-{chemical_terms_ss}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdf:type];
+    	rr:objectMap	[ rr:constant sio:000897; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rr:template "{genetic_terms_ss}-{chemical_terms_ss}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:comment];
+    	rr:objectMap	[ rr:template "Association between gene {genetic_terms_ss} and chemical {chemical_terms_ss}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+.
+
+
+
+<#GENE>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "solr-evidences.json";
+    	rml:referenceFormulation ql:jsonpath;
+        rml:iterator "$.response.docs[*]";
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://vocab.linkeddata.es/res/eboca-evidences/gene-{genetic_terms_ss}" ;
+    	rr:class ncit:C16612 ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rml:reference "genetic_terms_ss"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+.
+
+
+
+<#DISEASE>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "solr-evidences.json";
+    	rml:referenceFormulation ql:jsonpath;
+        rml:iterator "$.response.docs[*]";
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://vocab.linkeddata.es/res/eboca-evidences/dis-{disease_terms_ss}" ;
+    	rr:class ncit:C7057 ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rml:reference "disease_terms_ss"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+.
+
+
+
+<#CHEMICAL>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "solr-evidences.json";
+    	rml:referenceFormulation ql:jsonpath;
+        rml:iterator "$.response.docs[*]";
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://vocab.linkeddata.es/res/eboca-evidences/chem-{chemical_terms_ss}" ;
+    	rr:class cco:Substance ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rml:reference "chemical_terms_ss"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+.
+
+
+
+<#EV-DG>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "solr-evidences.json";
+    	rml:referenceFormulation ql:jsonpath;
+        rml:iterator "$.response.docs[*]";
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://vocab.linkeddata.es/res/eboca-evidences/evidence-{disease_terms_ss}-{genetic_terms_ss}-{id}" ;
+    	rr:class ebocaev:Evidence ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:createdOn];
+    	rr:objectMap	[ rr:constant "2022-06-08 00:00:00"; rr:termType rr:Literal; rr:datatype xsd:dateTime ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:lastUpdatedOn];
+    	rr:objectMap	[ rr:constant "2022-06-09 00:00:00"; rr:termType rr:Literal; rr:datatype xsd:dateTime ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:version];
+    	rr:objectMap	[ rml:reference "_version_"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:derivedFrom];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/paragraph-{id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdf:type];
+    	rr:objectMap	[ rr:constant obo:ECO_0007672; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rr:template "{disease_terms_ss}-{genetic_terms_ss}-{id}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:comment];
+    	rr:objectMap	[ rr:template "Evidence of association between disease {disease_terms_ss} and gene {genetic_terms_ss} in paragraph {id}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:createdWith];
+    	rr:objectMap	[ rr:constant "https://github.com/drugs4covid/bio-ner"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:createdBy];
+    	rr:objectMap	[ rr:constant "https://oeg.fi.upm.es/"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
+
+
+<#EV-DC>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "solr-evidences.json";
+    	rml:referenceFormulation ql:jsonpath;
+        rml:iterator "$.response.docs[*]";
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://vocab.linkeddata.es/res/eboca-evidences/evidence-{disease_terms_ss}-{chemical_terms_ss}-{id}" ;
+    	rr:class ebocaev:Evidence ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:createdOn];
+    	rr:objectMap	[ rr:constant "2022-06-08 00:00:00"; rr:termType rr:Literal; rr:datatype xsd:dateTime ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:lastUpdatedOn];
+    	rr:objectMap	[ rr:constant "2022-06-09 00:00:00"; rr:termType rr:Literal; rr:datatype xsd:dateTime ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:version];
+    	rr:objectMap	[ rml:reference "_version_"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:derivedFrom];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/paragraph-{id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdf:type];
+    	rr:objectMap	[ rr:constant obo:ECO_0007672; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rr:template "{disease_terms_ss}-{chemical_terms_ss}-{id}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:comment];
+    	rr:objectMap	[ rr:template "Evidence of association between disease {disease_terms_ss} and chemical {chemical_terms_ss} in paragraph {id}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:createdWith];
+    	rr:objectMap	[ rr:constant "https://github.com/drugs4covid/bio-ner"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:createdBy];
+    	rr:objectMap	[ rr:constant "https://oeg.fi.upm.es/"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
+
+
+<#EV-GC>
+    a rr:TriplesMap;
+    rml:logicalSource [
+    	rml:source "solr-evidences.json";
+    	rml:referenceFormulation ql:jsonpath;
+        rml:iterator "$.response.docs[*]";
+    ];
+    rr:subjectMap [
+    	a rr:Subject ;
+    	rr:termType rr:IRI ;
+    	rr:template "http://vocab.linkeddata.es/res/eboca-evidences/evidence-{genetic_terms_ss}-{chemical_terms_ss}-{id}" ;
+    	rr:class ebocaev:Evidence ;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:createdOn];
+    	rr:objectMap	[ rr:constant "2022-06-08 00:00:00"; rr:termType rr:Literal; rr:datatype xsd:dateTime ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:lastUpdatedOn];
+    	rr:objectMap	[ rr:constant "2022-06-09 00:00:00"; rr:termType rr:Literal; rr:datatype xsd:dateTime ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:version];
+    	rr:objectMap	[ rml:reference "_version_"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:derivedFrom];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/paragraph-{id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdf:type];
+    	rr:objectMap	[ rr:constant obo:ECO_0007672; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rr:template "{genetic_terms_ss}-{chemical_terms_ss}-{id}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:comment];
+    	rr:objectMap	[ rr:template "Evidence of association between gene {genetic_terms_ss} and chemical {chemical_terms_ss}  in paragraph {id}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:createdWith];
+    	rr:objectMap	[ rr:constant "https://github.com/drugs4covid/bio-ner"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant pav:createdBy];
+    	rr:objectMap	[ rr:constant "https://oeg.fi.upm.es/"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
