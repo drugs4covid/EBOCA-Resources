@@ -117,16 +117,16 @@
     	rr:class sio:000983 ;
     ];
     rr:predicateObjectMap [
-    	rr:predicateMap	[ rr:constant sio:000628];
+    	rr:predicateMap	[ rr:constant sio:SIO_000628];
     	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/gene-{genetic_terms_ss}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
     rr:predicateObjectMap [
-    	rr:predicateMap	[ rr:constant sio:000628];
+    	rr:predicateMap	[ rr:constant sio:SIO_000628];
     	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/dis-{disease_terms_ss}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant rdf:type];
-    	rr:objectMap	[ rr:constant sio:000897; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    	rr:objectMap	[ rr:constant sio:SIO_000897; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant rdfs:label];
@@ -135,6 +135,10 @@
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant rdfs:comment];
     	rr:objectMap	[ rr:template "Association between disease {disease_terms_ss} and gene {genetic_terms_ss}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000772];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/evidence-{disease_terms_ss}-{genetic_terms_ss}-{id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
 .
 
@@ -154,16 +158,16 @@
     	rr:class disnet:DrugDisease ;
     ];
     rr:predicateObjectMap [
-    	rr:predicateMap	[ rr:constant sio:000628];
+    	rr:predicateMap	[ rr:constant sio:SIO_000628];
     	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/dis-{disease_terms_ss}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
     rr:predicateObjectMap [
-    	rr:predicateMap	[ rr:constant sio:000628];
+    	rr:predicateMap	[ rr:constant sio:SIO_000628];
     	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/chem-{chemical_terms_ss}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant rdf:type];
-    	rr:objectMap	[ rr:constant sio:000897; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    	rr:objectMap	[ rr:constant sio:SIO_000897; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant rdfs:label];
@@ -172,6 +176,10 @@
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant rdfs:comment];
     	rr:objectMap	[ rr:template "Association between disease {disease_terms_ss} and chemical {chemical_terms_ss}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000772];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/evidence-{disease_terms_ss}-{chemical_terms_ss}-{id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
 .
 
@@ -191,16 +199,16 @@
     	rr:class sio:001257 ;
     ];
     rr:predicateObjectMap [
-    	rr:predicateMap	[ rr:constant sio:000628];
+    	rr:predicateMap	[ rr:constant sio:SIO_000628];
     	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/gene-{genetic_terms_ss}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
     rr:predicateObjectMap [
-    	rr:predicateMap	[ rr:constant sio:000628];
+    	rr:predicateMap	[ rr:constant sio:SIO_000628];
     	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/chem-{chemical_terms_ss}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant rdf:type];
-    	rr:objectMap	[ rr:constant sio:000897; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    	rr:objectMap	[ rr:constant sio:SIO_000897; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant rdfs:label];
@@ -209,6 +217,10 @@
     rr:predicateObjectMap [
     	rr:predicateMap	[ rr:constant rdfs:comment];
     	rr:objectMap	[ rr:template "Association between gene {genetic_terms_ss} and chemical {chemical_terms_ss}"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000772];
+    	rr:objectMap	[ rr:template "http://vocab.linkeddata.es/res/eboca-evidences/evidence-{genetic_terms_ss}-{chemical_terms_ss}-{id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
 .
 
