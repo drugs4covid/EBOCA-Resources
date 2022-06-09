@@ -1,8 +1,8 @@
-## EBOCA Evidences
+# EBOCA Evidences
 
-### eboca-ev1
+## eboca-ev1
 An association can have an evidence
-```
+```Sparql
 PREFIX ebocaev: <https://w3id.org/eboca/evidences#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -24,9 +24,9 @@ WHERE {
 }
 ```
 
-### eboca-ev2
+## eboca-ev2
 Evidences may be inferred or documented
-```
+```Sparql
 PREFIX ebocaev: <https://w3id.org/eboca/evidences#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -48,9 +48,9 @@ WHERE {
 ```
 
 
-### eboca-ev3
+## eboca-ev3
 Evidences are extracted from texts
-```
+```Sparql
 PREFIX ebocaev: <https://w3id.org/eboca/evidences#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -73,9 +73,9 @@ WHERE {
 }
 ```
 
-### eboca-ev4
+## eboca-ev4
 Texts and its parts can be uniquely identified
-```
+```Sparql
 PREFIX ebocaev: <https://w3id.org/eboca/evidences#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -100,9 +100,9 @@ WHERE {
 }
 ```
 
-### eboca-ev5
+## eboca-ev5
 Evidences have a date of creation and update
-```
+```Sparql
 PREFIX ebocaev: <https://w3id.org/eboca/evidences#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -125,9 +125,9 @@ WHERE {
 }
 ```
 
-### eboca-ev6
+## eboca-ev6
 Evidences may be created with software
-```
+```Sparql
 PREFIX ebocaev: <https://w3id.org/eboca/evidences#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -151,9 +151,9 @@ WHERE {
 }
 ```
 
-### eboca-ev7
+## eboca-ev7
 Evidence may be created with a confidence score
-```
+```Sparql
 PREFIX ebocaev: <https://w3id.org/eboca/evidences#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -178,10 +178,9 @@ WHERE {
 
 
 
-### eboca-ev8
+## eboca-ev8
 How many evidences of associations with chemicals has each gene?
-
-```
+```Sparql
 PREFIX ebocaev: <https://w3id.org/eboca/evidences#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -205,9 +204,9 @@ WHERE {
 GROUP BY ?gene ?gene_label
 ```
 
-### eboca-ev9
+## eboca-ev9
 Which associations between diseases and chemicals have more than one evidence?
-```
+```Sparql
 PREFIX ebocaev: <https://w3id.org/eboca/evidences#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -235,9 +234,9 @@ GROUP BY ?association ?chemical ?disease
 HAVING (?count_ev > 1)
 ```
 
-### eboca-ev10
+## eboca-ev10
 Which papers contain evidence of associations between the drug 'Celecoxib' and the disease 'Osteoarthritis'?
-```
+```Sparql
 PREFIX ebocaev: <https://w3id.org/eboca/evidences#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
