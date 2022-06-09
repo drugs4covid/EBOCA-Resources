@@ -1,0 +1,386 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+@prefix schema: <https://schema.org/>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix disnet: <https://w3id.org/eboca/sem-disnet/>.
+@prefix vso: <http://purl.org/vso/ns#>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>.
+@prefix sio: <http://semanticscience.org/resource/>.
+@prefix obo: <http://purl.obolibrary.org/obo/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix cco: <http://rdf.ebi.ac.uk/terms/chembl#>.
+@prefix ctd: <http://bio2rdf.org/ctd_vocabulary:#>.
+@prefix wp: <http://vocabularies.wikipathways.org/wp#>.
+@base <http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#>.
+
+
+<#DISEASE>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.disease"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{disease_id}";
+    	rr:class ncit:C7057;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant dcterms:identifier];
+    	rr:objectMap	[ rr:column "disease_id"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rr:column "disease_name"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+.
+
+
+
+<#VD-ASSOC>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.disease_variant"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{disease_id}-{variant_id}";
+    	rr:class disnet:VariantDiseaseAssociation;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000628];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{disease_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000628];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{variant_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
+
+
+<#VARIANT>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.variant"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{variant_id}";
+    	rr:class obo:SO_0001060;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant disnet:consequence];
+    	rr:objectMap	[ rr:column "consequence"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant skos:exactMatch];
+    	rr:objectMap	[ rr:template "http://identifiers.org/dbsnp/{variant_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:isDefinedBy];
+    	rr:objectMap	[ rr:constant "http://rdf.disgenet.org/v2.1.0/void.ttl#"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000216];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#variant-dpi-{variant_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000216];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#variant-dsi-{variant_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
+
+
+<#GENE>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.gene"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{gene_id}";
+    	rr:class ncit:C16612;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant dcterms:identifier];
+    	rr:objectMap	[ rr:column "gene_id"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rr:column "gene_name"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+.
+
+
+
+<#GD-ASSOC>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.disease_gene"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{disease_id}-{gene_id}";
+    	rr:class sio:SIO_000983;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000628];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{gene_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000628];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{disease_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
+
+
+<#SCORE-GD>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.disease_gene"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#score-{disease_id}-{gene_id}";
+    	rr:class ncit:C25338;
+    ];
+.
+
+
+
+<#SCORE-VD>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.disease_variant"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#score-{disease_id}-{variant_id}";
+    	rr:class ncit:C25338;
+    ];
+.
+
+
+
+<#DRUG>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_drugslayer.drug"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{drug_id}";
+    	rr:class cco:Substance;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant dcterms:identifier];
+    	rr:objectMap	[ rr:column "drug_id"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rr:column "drug_name"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+.
+
+
+
+<#DD-ASSOC>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "drug_disease"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{drug_id}-{disease_id}";
+    	rr:class ctd:Chemical-Disease-Association;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000628];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{drug_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000628];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{disease_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdf:type];
+    	rr:objectMap	[ rr:template "https://w3id.org/eboca/sem-disnet/DrugDisease{direct_evidence}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
+
+
+<#DP-INDEX-GENE>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.gene"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#gene-dpi-{gene_id}";
+    	rr:class sio:SIO_001351;
+    ];
+.
+
+
+
+<#DS-INDEX-GENE>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.gene"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#gene-dsi-{gene_id}";
+    	rr:class sio:SIO_001352;
+    ];
+.
+
+
+
+<#DP-INDEX-VARIANT>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.variant"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#variant-dpi-{variant_id}";
+    	rr:class sio:SIO_001351;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000300];
+    	rr:objectMap	[ rr:column "DPI"; rr:termType rr:Literal; rr:datatype xsd:float ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000215];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{variant_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
+
+
+<#DS-INDEX-VARIANT>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.variant"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#variant-dsi-{variant_id}";
+    	rr:class sio:SIO_001352;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000300];
+    	rr:objectMap	[ rr:column "DSI"; rr:termType rr:Literal; rr:datatype xsd:float ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000215];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{variant_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
+
+
+<#VARIANT-GENE>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.gene_variant"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{variant_id}";
+    	rr:class obo:SO_0001060;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_001403];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{gene_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
+
+
+<#GENE-VARIANT>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.gene_variant"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{gene_id}";
+    	rr:class ncit:C16612;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant ncit:R178];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{variant_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
+
+
+<#PATHWAY>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.pathway"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{pathway_id}";
+    	rr:class wp:Pathway;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant dcterms:identifier];
+    	rr:objectMap	[ rr:column "pathway_id"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant rdfs:label];
+    	rr:objectMap	[ rr:column "pathway_name"; rr:termType rr:Literal; rr:datatype xsd:string ]
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant skos:exactMatch];
+    	rr:objectMap	[ rr:template "https://vocabularies.wikipathways.org/wp#{pathway_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
+
+
+<#GENE-PATHWAY>
+    a rr:TriplesMap;
+    rr:logicalTable [
+    	rr:tableName "disnet_biolayer.gene_pathway"
+    ];
+    rr:subjectMap [
+    	a rr:Subject;
+    	rr:termType rr:IRI;
+    	rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{gene_id}";
+    	rr:class ncit:C16612;
+    ];
+    rr:predicateObjectMap [
+    	rr:predicateMap	[ rr:constant sio:SIO_000068];
+    	rr:objectMap	[ rr:template "http://medal.ctb.upm.es/projects/DISNET/res/sem-disnet#{pathway_id}"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
+    ];
+.
+
