@@ -26,7 +26,7 @@
 @prefix cco: <http://rdf.ebi.ac.uk/terms/chembl#>.
 @prefix ctd: <http://bio2rdf.org/ctd_vocabulary:#>.
 @prefix wp: <http://vocabularies.wikipathways.org/wp#>.
-@prefix ebocaev: <https://w3id.org/eboca/evidences/>.
+@prefix ebocaev: <https://w3id.org/eboca/evidences#>.
 @prefix frbr: <http://purl.org/vocab/frbr/core#>.
 @base <http://vocab.linkeddata.es/res/eboca-evidences/>.
 
@@ -445,4 +445,3 @@
     	rr:objectMap	[ rr:constant "https://oeg.fi.upm.es/"; rr:termType rr:IRI; rr:datatype xsd:anyURI ]
     ];
 .
-
