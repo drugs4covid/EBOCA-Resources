@@ -1,4 +1,4 @@
-# EBOCA KG
+# EBOCA Resources
 Resources for constructing the Knowledge Graph generated anotating source data with the [EBOCA ontology](https://w3id.org/eboca/portal). The construction of the KG follows a systematic and maintainable approach creating RML and R2RML mappings with [Mapeathor](https://github.com/oeg-upm/mapeathor), and using [Morph-KGC](https://github.com/oeg-upm/morph-kgc) for transforming the original input data (from JSON data and relational databases) into RDF. This repository contains the resources necessary te create triples for both modules, [SEM-DISNET](https://w3id.org/eboca/sem-disnet) and [Evidences](https://w3id.org/eboca/evidences). 
 
 ## Resources
