@@ -14,6 +14,3 @@ The management of issues and improvements suggested for this repository is done 
 * Ana Iglesias-Molina - [ana.iglesiasm@upm.es](mailto:ana.iglesiasm@upm.es)
 * Lucía Prieto Santamaría - [lucia.prieto.santamaria@upm.es](mailto:lucia.prieto.santamaria@upm.es)
 * Andrea Álvarez Pérez - [andrea.alvarezp@alumnos.upm.es](andrea.alvarezp@alumnos.upm.es)
-* María Poveda-Villalón
-* Carlos Badenes-Olmedo
-* Alejandro Rodríguez-González
